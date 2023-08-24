@@ -1,0 +1,37 @@
+QMainWindow {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif; /* 设置整体字体 */
+    font-size: 14px;
+}
+
+QTextBrowser {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: Arial, sans-serif; /* 设置文本浏览器字体 */
+    font-size: 14px;
+}
+
+QLineEdit {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: Arial, sans-serif; /* 设置输入框字体 */
+    font-size: 14px;
+}
+
+QPushButton {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-family: Arial, sans-serif; /* 设置按钮字体 */
+    font-size: 14px;
+}
+
+QPushButton:hover {
+    background-color: #0056b3;
+}
