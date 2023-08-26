@@ -9,7 +9,7 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 
 from tensorflow.keras.models import load_model
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTextBrowser, QLineEdit, QPushButton, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTextBrowser, QLineEdit, QPushButton, QVBoxLayout, QWidget, QHBoxLayout
 
 filename = 'intents.json'
 
@@ -36,14 +36,22 @@ class ChatBotGUI(QMainWindow):
 
         layout = QVBoxLayout()
         layout.addWidget(self.text_browser)
-        layout.addWidget(self.user_input)
-        layout.addWidget(self.send_button)
+
+        input_layout = QHBoxLayout()  
+        input_layout.addWidget(self.user_input)
+        input_layout.addWidget(self.send_button)
+        layout.addLayout(input_layout) 
 
         container = QWidget()
         container.setLayout(layout)
         self.setCentralWidget(container)
 
         self.send_button.clicked.connect(self.on_send_button_click)
+        self.user_input.returnPressed.connect(self.send_button.click)
+
+        # Apply styles using QSS
+        with open('style.qss', 'r') as style_file:
+            self.setStyleSheet(style_file.read())
 
     def clean_up_sentence(self, sentence):
         sentence_words = nltk.wordpunct_tokenize(sentence)
@@ -87,8 +95,8 @@ class ChatBotGUI(QMainWindow):
         ints = self.predict_class(user_message)
         response = self.get_response(ints, self.intents)
 
-        self.text_browser.append("You: " + user_message)
-        self.text_browser.append("Bot: " + response)
+        self.text_browser.append("<span style='color: blue;'>You: </span>" + user_message)
+        self.text_browser.append("<span style='color: green;'>Bot: </span>" + response)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
